@@ -79,14 +79,16 @@ function Player(x,y,type){
             x:this.x+this.xspeed,
             y:this.y,
             width:this.width,
-            height:this.height
+            height:this.height,
+            gameNmr:this.type
         }
         let verticalRect={
             type:this.type,
             x:this.x,
             y:this.y+this.yspeed,
             width:this.width,
-            height:this.height
+            height:this.height,
+            gameNmr:this.type
         }
 
         for(let i=0;i<borders.length;i++){
@@ -95,7 +97,9 @@ function Player(x,y,type){
              y:borders[i].y,
              width:borders[i].width,
              height: borders[i].height,
-             type:borders[i].type
+             type:borders[i].type,
+             gameNmr:borders[i].gameNmr,
+             interactive:borders[i].interactive
          }
          if(checkIntersection(horizontalRect,borderRect)){
             this.xspeed=0;

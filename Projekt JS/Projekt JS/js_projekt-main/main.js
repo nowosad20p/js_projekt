@@ -6,19 +6,23 @@ let player;
 let borders = [];
 let interactives = [];
 
-var upKey1;
-var rightKey1;
-var downKey1;
-var leftKey1;
-var upKey2;
-var rightKey2;
-var downKey2;
-var leftKey2;
+let upKey1;
+let rightKey1;
+let downKey1;
+let leftKey1;
+let upKey2;
+let rightKey2;
+let downKey2;
+let leftKey2;
+let interactionKey;
+let interactionKey2;
+
+let framerate=45;
 
 let playerOneFinished;
 let playerTwoFinished;
 
-let curLevel = 1;
+let curLevel = 2;
 
 window.onload = function() {
   canvas = document.getElementById("gameCnv");
@@ -27,10 +31,10 @@ window.onload = function() {
   canvas2 = document.getElementById("gameCnv2");
   context2 = canvas2.getContext("2d");
 
-  player = new Player(10, 10, 0);
-  player2 = new Player(30, 30, 1);
+  player = new Player(10, 40, 0);
+  player2 = new Player(30, 40, 1);
 
-  gameLoop = setInterval(step, 1000 / 45);
+  gameLoop = setInterval(step, 1000 / framerate);
 
   context.fillStyle = "lightGray";
   context.fillRect(0, 0, 1280, 360);
@@ -43,6 +47,10 @@ function step() {
   player.step();
   player2.step();
   draw();
+  for(let i=0;i<interactives.length;i++){
+     interactives[i].check(player.x,player.y);
+     interactives[i].check(player2.x,player2.y);
+  }
 }
 function draw() {
   context.fillStyle = "lightGray";
@@ -84,6 +92,12 @@ function setupInputs() {
     if (event.key === "ArrowRight") {
       rightKey2 = true;
     }
+    if (event.key === "e") {
+      interactionKey = true;
+    }
+    if (event.key === ".") {
+      interactionKey2 = true;
+    }
   });
   document.addEventListener("keyup", function(event) {
     if (event.key === "w") {
@@ -110,6 +124,12 @@ function setupInputs() {
     if (event.key === "ArrowRight") {
       rightKey2 = false;
     }
+    if (event.key === "e") {
+      interactionKey = false;
+    }
+    if (event.key === ".") {
+      interactionKey2 = false;
+    }
   });
 }
 function checkIntersection(r1, r2) {
@@ -131,7 +151,12 @@ function checkIntersection(r1, r2) {
         objective(true, r1.type);
       }
     }
-
+    if(r1.gameNmr!=r2.gameNmr){
+      return false;
+    }
+    if(r2.interactive.active==true){
+      return false;
+    }
     return true;
   }
 }
@@ -158,21 +183,23 @@ function setupLvl(level) {
   playerTwoFinished = false;
   borders = [];
   if (level == 1) {
-    borders.push(new Border(0, 350, 1280, 10, 1, 1));
-    borders.push(new Border(0, 350, 1280, 10, 1, 0));
-    borders.push(new Border(100, 310, 100, 100, 1, 0));
-    borders.push(new Border(100, 310, 100, 100, 1, 1));
-    borders.push(new Border(310, 260, 100, 50, 1, 0));
-    borders.push(new Border(310, 260, 100, 50, 1, 1));
-    borders.push(new Border(610, 190, 100, 50, 1, 0));
-    borders.push(new Border(610, 190, 100, 50, 1, 1));
-    borders.push(new Border(810, 190, 100, 50, 2, 0));
-    borders.push(new Border(810, 190, 100, 50, 2, 1));
+    borders.push(new Border(0, 350, 1280, 10, 1, 1,null));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0,null));
+    borders.push(new Border(100, 310, 100, 100, 1, 0,null));
+    borders.push(new Border(100, 310, 100, 100, 1, 1,null));
+    borders.push(new Border(310, 260, 100, 50, 1, 0,null));
+    borders.push(new Border(310, 260, 100, 50, 1, 1,null));
+    borders.push(new Border(610, 190, 100, 50, 1, 0,null));
+    borders.push(new Border(610, 190, 100, 50, 1, 1,null));
+    borders.push(new Border(810, 190, 100, 50, 2, 0,null));
+    borders.push(new Border(810, 190, 100, 50, 2, 1,null));
   }
   if (level == 2) {
-    borders.push(new Border(0, 350, 1280, 10, 1, 1));
-    borders.push(new Border(0, 350, 1280, 10, 1, 0));
-    interactives.push(new InteractiveObject(50, 50, 50, 50, 0, 0));
+    interactives.push(new InteractiveObject(50, 210, 50, 50, 0, 0));
+    interactives.push(new InteractiveObject(50, 210, 50, 50, 1, 1));
+    borders.push(new Border(0, 350, 1280, 10, 3, 1,interactives[0]));
+    borders.push(new Border(0, 350, 1280, 10, 3, 0,interactives[1]));
+    
   }
 }
 function checkLvl() {
