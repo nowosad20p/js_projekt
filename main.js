@@ -6,6 +6,8 @@ let player;
 let borders = [];
 let interactives = [];
 
+
+//inputs
 let upKey1;
 let rightKey1;
 let downKey1;
@@ -17,7 +19,9 @@ let leftKey2;
 let interactionKey;
 let interactionKey2;
 
+//game settings
 let framerate=45;
+let interactiveRange=152;
 
 let playerOneFinished;
 let playerTwoFinished;
@@ -48,8 +52,8 @@ function step() {
   player2.step();
   draw();
   for(let i=0;i<interactives.length;i++){
-     interactives[i].check(player.x,player.y);
-     interactives[i].check(player2.x,player2.y);
+     interactives[i].check(player.x,player.y,player.height,player.with);
+     interactives[i].check(player2.x,player2.y,player.height,player.width);
   }
 }
 function draw() {
@@ -195,10 +199,10 @@ function setupLvl(level) {
     borders.push(new Border(810, 190, 100, 50, 2, 1,null));
   }
   if (level == 2) {
-    interactives.push(new InteractiveObject(50, 210, 50, 50, 0, 0));
-    interactives.push(new InteractiveObject(50, 210, 50, 50, 1, 1));
-    borders.push(new Border(0, 350, 1280, 10, 3, 1,interactives[0]));
-    borders.push(new Border(0, 350, 1280, 10, 3, 0,interactives[1]));
+    interactives.push(new InteractiveObject(1001, 250, 50, 50, 0, 0));
+    interactives.push(new InteractiveObject(1010, 250, 50, 50, 1, 1));
+    borders.push(new Border(0, 350, 1280, 10, 3, 0,interactives[0]));
+    borders.push(new Border(0, 350, 1280, 10, 3, 1,interactives[1]));
     
   }
 }
