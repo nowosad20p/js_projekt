@@ -57,6 +57,7 @@ function step() {
   }
 }
 function draw() {
+  console.log(playerOneFinished+" "+playerTwoFinished)
   context.fillStyle = "lightGray";
   context.fillRect(0, 0, 1280, 360);
   context2.fillStyle = "lightGray";
@@ -137,16 +138,21 @@ function setupInputs() {
   });
 }
 function checkIntersection(r1, r2) {
+  if(r1.gameNmr==r2.gameNmr){
   if (r1.x > r2.x + r2.width) {
+    if(r2.type==2)
     objective(false, r1.type);
     return false;
   } else if (r1.x + r1.width <= r2.x) {
+    if(r2.type==2)
     objective(false, r1.type);
     return false;
   } else if (r1.y >= r2.y + r2.height) {
+    if(r2.type==2)
     objective(false, r1.type);
     return false;
   } else if (r1.y + r1.height <= r2.y) {
+    if(r2.type==2)
     objective(false, r1.type);
     return false;
   } else {
@@ -158,11 +164,15 @@ function checkIntersection(r1, r2) {
     if(r1.gameNmr!=r2.gameNmr){
       return false;
     }
+    if(r2.interactive!=null){
     if(r2.interactive.active==true){
+
       return false;
     }
+  }
     return true;
   }
+}
 }
 function objective(onOff, playerNmr) {
   if (onOff) {
@@ -187,23 +197,38 @@ function setupLvl(level) {
   playerTwoFinished = false;
   borders = [];
   if (level == 1) {
-    borders.push(new Border(0, 350, 1280, 10, 1, 1,null));
-    borders.push(new Border(0, 350, 1280, 10, 1, 0,null));
-    borders.push(new Border(100, 310, 100, 100, 1, 0,null));
-    borders.push(new Border(100, 310, 100, 100, 1, 1,null));
-    borders.push(new Border(310, 260, 100, 50, 1, 0,null));
-    borders.push(new Border(310, 260, 100, 50, 1, 1,null));
-    borders.push(new Border(610, 190, 100, 50, 1, 0,null));
-    borders.push(new Border(610, 190, 100, 50, 1, 1,null));
-    borders.push(new Border(810, 190, 100, 50, 2, 0,null));
-    borders.push(new Border(810, 190, 100, 50, 2, 1,null));
+    borders.push(new Border(0, 350, 1280, 10, 1, 1,null,"black"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0,null,"gray"));
+    borders.push(new Border(100, 310, 100, 100, 1, 0,null,"gray"));
+    borders.push(new Border(100, 310, 100, 100, 1, 1,null,"black"));
+    borders.push(new Border(310, 260, 100, 50, 1, 0,null,"gray"));
+    borders.push(new Border(310, 260, 100, 50, 1, 1,null,"black"));
+    borders.push(new Border(610, 190, 100, 50, 1, 0,null,"gray"));
+    borders.push(new Border(610, 190, 100, 50, 1, 1,null,"black"));
+    borders.push(new Border(810, 190, 100, 50, 2, 0,null,"green"));
+    borders.push(new Border(810, 190, 100, 50, 2, 1,null,"green"));
   }
   if (level == 2) {
-    interactives.push(new InteractiveObject(1001, 250, 50, 50, 0, 0));
-    interactives.push(new InteractiveObject(1010, 250, 50, 50, 1, 1));
+    borders.push(new Border(0, 350, 1280, 10, 1, 1,null,"black"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0,null,"gray"));
+    borders.push(new Border(200,340,100,10,1,0,null,"red"))
+    borders.push(new Border(400,340,100,10,1,0,null,"yellow"))
+    
+    borders.push(new Border(800,340,100,10,1,0,null,"green"))
+    borders.push(new Border(1000,340,100,10,1,0,null,"pink"))
+    
+    borders.push(new Border(200,340,100,10,1,1,null,"blue"))
+    borders.push(new Border(400,340,100,10,1,1,null,"yellow"))
+    borders.push(new Border(600,340,100,10,1,1,null,"green"))
+    borders.push(new Border(1000,340,100,10,1,1,null,"purple"))
+    borders.push(new Border(800,340,100,10,2,1,null,"yellow"))
+    borders.push(new Border(600,340,100,10,2,0,null,"yellow"))
+  }
+  if(level == 3){
+    interactives.push(new InteractiveObject(1001, 300, 50, 50, 0, 0));
+    interactives.push(new InteractiveObject(1010, 300, 50, 50, 1, 1));
     borders.push(new Border(0, 350, 1280, 10, 3, 0,interactives[0]));
     borders.push(new Border(0, 350, 1280, 10, 3, 1,interactives[1]));
-    
   }
 }
 function checkLvl() {
