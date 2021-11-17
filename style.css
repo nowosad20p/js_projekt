@@ -1,3 +1,8 @@
+#errorMessage{
+    color:red;
+    font-size:15px ;
+    margin:5;
+}
 body{
     margin:0;
     padding:0;
@@ -45,7 +50,7 @@ canvas{
 
 }
 footer{
-    margin-top:50px;
+    margin-top:10px;
 }
 hr{
     background-color:darkgray;
