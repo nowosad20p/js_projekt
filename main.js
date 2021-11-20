@@ -27,7 +27,7 @@ let interactiveRange = 152;
 let playerOneFinished;
 let playerTwoFinished;
 
-let curLevel = 3;
+let curLevel = 5;
 let maxLevel = curLevel;
 
 function loadSettings() {
@@ -281,10 +281,10 @@ function setupLvl(level) {
     borders.push(new Border(600, 340, 100, 10, 2, 0, null, "yellow"))
   }
   if (level == 3) {
-    interactives.push(new InteractiveObject(100, 102, 50, 50, 0, 0));
+    interactives.push(new InteractiveObject(100, 102, 50, 50, 0,0));
     borders.push(new Border(1100, 150, 10, 520, 3, 0, interactives[0],"black"));
     
-    interactives.push(new InteractiveObject(100, 102, 50, 50, 1, 1));
+    interactives.push(new InteractiveObject(100, 102, 50, 50, 1,0));
     borders.push(new Border(1100, 150, 10, 520, 3, 1, interactives[1],"black"));
 
     borders.push(new Border(300,210,50,90,1,0,null,"black"))
@@ -320,6 +320,30 @@ function setupLvl(level) {
 
     borders.push(new Border(1150, 340, 1280, 10, 2, 0, null,"green"));
     borders.push(new Border(1150, 340, 1280, 10, 2, 1, null,"green"));
+  }
+  if(level==5){
+
+    interactives.push(new InteractiveObject(200, 130, 50, 50, 1,0));
+    interactives.push(new InteractiveObject(1200, 125, 50, 25, 0,1));
+    interactives.push(new InteractiveObject(1200, 340, 50, 10, 1,1));
+
+    borders.push(new Border(0, 350, 400, 10, 1, 0, null,"black"));
+    borders.push(new Border(900, 350, 380, 10, 1, 0, null,"black"));
+    borders.push(new Border(900, 150, 380, 10, 1, 0, null,"black"));
+    borders.push(new Border(900, 150, 10, 200, 1, 0, interactives[2],"blue"));
+    borders.push(new Border(400, 250, 100, 10, 1, 0, null,"black"));
+    borders.push(new Border(600, 300, 100, 10, 1, 0, null,"black"));
+    borders.push(new Border(200, 180, 100, 10, 1, 0, null,"black"));
+    borders.push(new Border(700, 180, 100, 10, 1, 0, null,"black"));
+    borders.push(new Border(900, 00, 10, 200, 1, 0, interactives[0],"blue"));
+
+    borders.push(new Border(900, 150, 380, 10, 1, 1, null,"black"));
+    borders.push(new Border(400, 250, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(600, 300, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(200, 180, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(900, 150, 10, 200, 1, 1, interactives[1],"blue"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 1, null,"black"));
+    
   }
 }
 

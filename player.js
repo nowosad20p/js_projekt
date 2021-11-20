@@ -57,19 +57,19 @@ function Player(x, y, type) {
             if (this.xspeed < -this.maxSpeed) {
                 this.xspeed = -this.maxSpeed;
             }
-            // if(this.yspeed>this.maxSpeed){
-            //     this.yspeed=this.maxSpeed;
-            //  }
+            if (this.yspeed > this.maxSpeed) {
+                this.yspeed = this.maxSpeed;
+            }
             if (this.yspeed < -this.maxSpeed) {
                 this.yspeed = -this.maxSpeed;
             }
 
 
-            // if(this.xspeed>0){
-            //     this.xspeed=Math.floor(this.xspeed);
-            // }else{
-            //     this.xspeed=Math.ceil(this.xspeed);
-            // }
+            if (this.xspeed > 0) {
+                this.xspeed = Math.floor(this.xspeed);
+            } else {
+                this.xspeed = Math.ceil(this.xspeed);
+            }
             // if(this.yspeed>0){
             //     this.yspeed=Math.floor(this.yspeed);
             // }else{
@@ -86,7 +86,7 @@ function Player(x, y, type) {
             let verticalRect = {
                 type: this.type,
                 x: this.x,
-                y: this.y + this.yspeed,
+                y: this.y + this.yspeed + 1,
                 width: this.width,
                 height: this.height,
                 gameNmr: this.type
@@ -109,6 +109,47 @@ function Player(x, y, type) {
                 if (checkIntersection(verticalRect, borderRect)) {
                     this.yspeed = 0;
 
+                }
+            }
+            for (let i = 0; i < interactives.length; i++) {
+                let interactiveRect = {
+                    x: interactives[i].x,
+                    y: interactives[i].y,
+                    width: interactives[i].width,
+                    height: interactives[i].height,
+                    type: interactives[i].type,
+                    gameNmr: interactives[i].gameNmr,
+                    active: interactives[i].active,
+                }
+
+                if (checkIntersection(horizontalRect, interactiveRect)) {
+
+
+                    this.xspeed = 0;
+                }
+
+                if (checkIntersection(verticalRect, interactiveRect)) {
+
+                    this.yspeed = 0;
+
+                    if (interactives[i].type == 1) {
+                        if (interactives[i].cd < 1) {
+                            interactives[i].active = true;
+
+                            interactives[i].cd = 2
+                        }
+                    }
+
+                } else {
+                    if (interactives[i].type == 1) {
+                        if (interactives[i].cd < 1) {
+                            interactives[i].active = false;
+
+
+                        } else {
+                            interactives[i].cd--
+                        }
+                    }
                 }
             }
 

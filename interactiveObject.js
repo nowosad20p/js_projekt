@@ -1,12 +1,17 @@
-function InteractiveObject(x, y, width, height, gameNmr, id) {
+function InteractiveObject(x, y, width, height, gameNmr,type) {
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
   this.gameNmr = gameNmr;
-  this.id = id;
+  this.type=type;
   this.active = false;
-  this.cd = 2 * framerate;
+  if(this.type==1){
+this.cd=0;
+  }else{
+    this.cd = 2 * framerate;
+  }
+ 
   this.context1Color = "white";
   this.context2Color = "white";
   this.draw = function () {
@@ -70,7 +75,9 @@ function InteractiveObject(x, y, width, height, gameNmr, id) {
       }
 
     }
+
   }
+  
 
 
 }
