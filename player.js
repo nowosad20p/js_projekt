@@ -86,7 +86,7 @@ function Player(x, y, type) {
             let verticalRect = {
                 type: this.type,
                 x: this.x,
-                y: this.y + this.yspeed + 1,
+                y: this.y + this.yspeed,
                 width: this.width,
                 height: this.height,
                 gameNmr: this.type
@@ -161,12 +161,12 @@ function Player(x, y, type) {
     }
     this.draw = function () {
         if (type == 0) {
-            context.fillStyle = "pink";
+            context.fillStyle = "#2c2e30";
             context.fillRect(this.x, this.y, this.width, this.height);
 
         }
         if (type == 1) {
-            context2.fillStyle = "yellow";
+            context2.fillStyle = "#e9edf2";
             context2.fillRect(this.x, this.y, this.width, this.height);
         }
 
