@@ -65,18 +65,9 @@ function Player(x, y, type) {
             }
 
 
-            if (this.xspeed > 0) {
-                this.xspeed = Math.floor(this.xspeed);
-            } else {
-                this.xspeed = Math.ceil(this.xspeed);
-            }
-            // if(this.yspeed>0){
-            //     this.yspeed=Math.floor(this.yspeed);
-            // }else{
-            //     this.yspeed=Math.ceil(this.yspeed);
-            // }
+           
             let horizontalRect = {
-                x: this.x + this.xspeed,
+                x: this.x +this.xspeed,
                 y: this.y,
                 width: this.width,
                 height: this.height,
@@ -86,7 +77,7 @@ function Player(x, y, type) {
             let verticalRect = {
                 type: this.type,
                 x: this.x,
-                y: this.y + this.yspeed,
+                y: this.y+this.yspeed,
                 width: this.width,
                 height: this.height,
                 gameNmr: this.type
@@ -104,9 +95,23 @@ function Player(x, y, type) {
                     active: borders[i].active,
                 }
                 if (checkIntersection(horizontalRect, borderRect)) {
+                    while(checkIntersection(horizontalRect, borderRect)){
+                        horizontalRect.x-=Math.sign(this.xspeed);
+                       
+                    }this.x=horizontalRect.x;
                     this.xspeed = 0;
                 }
                 if (checkIntersection(verticalRect, borderRect)) {
+                    a=borderRect.type;
+                    if(borderRect.type==2){
+                        borderRect.type=1;
+                    }
+                    while(checkIntersection(verticalRect, borderRect)){
+                        verticalRect.y-=Math.sign(this.yspeed);
+                        
+                    }
+                    this.y=horizontalRect.y;
+                    borderRect.type=a;
                     this.yspeed = 0;
 
                 }
@@ -123,13 +128,20 @@ function Player(x, y, type) {
                 }
 
                 if (checkIntersection(horizontalRect, interactiveRect)) {
-
-
+                    while(checkIntersection(horizontalRect, interactiveRect)){
+                        horizontalRect.x-=Math.sign(this.xspeed);
+                       
+                    }
+                    this.x=horizontalRect.x;
                     this.xspeed = 0;
                 }
 
                 if (checkIntersection(verticalRect, interactiveRect)) {
-
+                    while(checkIntersection(verticalRect, interactiveRect)){
+                        verticalRect.y-=Math.sign(this.yspeed);
+                        
+                    }
+                    this.y=horizontalRect.y;
                     this.yspeed = 0;
 
                     if (interactives[i].type == 1) {
@@ -166,7 +178,7 @@ function Player(x, y, type) {
 
         }
         if (type == 1) {
-            context2.fillStyle = "#e9edf2";
+            context2.fillStyle = "#cccccc";
             context2.fillRect(this.x, this.y, this.width, this.height);
         }
 

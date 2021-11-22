@@ -270,10 +270,30 @@ function setupLvl(level) {
     borders.push(new Border(610, 190, 100, 50, 1, 1, null, "black"));
     borders.push(new Border(810, 190, 100, 50, 2, 0, null, "green"));
     borders.push(new Border(810, 190, 100, 50, 2, 1, null, "green"));
+    decorations.push(new Decoration("sun",0,1100,100))
+    decorations.push(new Decoration("moon",1,1100,100))
+    decorations.push(new Decoration("mountain",0,200,450))
+    decorations.push(new Decoration("mountain",0,300,350))
+    decorations.push(new Decoration("cloud",0,500,100))
+    decorations.push(new Decoration("cloud",0,1000,50))
+
+    decorations.push(new Decoration("mountain",1,200,450))
+    decorations.push(new Decoration("mountain",1,300,350))
+    decorations.push(new Decoration("cloud",1,500,100))
+    decorations.push(new Decoration("cloud",1,1000,50))
+    
     context.fillStyle = "black"
 
   }
   if (level == 2) {
+    decorations.push(new Decoration("sun",0,1100,100))
+    decorations.push(new Decoration("moon",1,1100,100))
+    decorations.push(new Decoration("mountain",0,300,500));
+    decorations.push(new Decoration("mountain",0,400,400));
+    decorations.push(new Decoration("mountain",1,300,500));
+    decorations.push(new Decoration("mountain",1,400,400));
+    decorations.push(new Decoration("cloud",1,500,100));
+    decorations.push(new Decoration("cloud",0,500,100));
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null, "black"));
     borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "gray"));
     borders.push(new Border(200, 340, 100, 10, 1, 0, null, "red"))
@@ -290,48 +310,70 @@ function setupLvl(level) {
     borders.push(new Border(600, 340, 100, 10, 2, 0, null, "yellow"))
   }
   if (level == 3) {
+    decorations.push(new Decoration("sun",0,1100,100))
+    decorations.push(new Decoration("moon",1,1100,100))
+    
     interactives.push(new InteractiveObject(100, 102, 50, 50, 0,0));
     borders.push(new Border(1100, 150, 10, 520, 3, 0, interactives[0],"black"));
     
     interactives.push(new InteractiveObject(100, 102, 50, 50, 1,0));
     borders.push(new Border(1100, 150, 10, 520, 3, 1, interactives[1],"black"));
 
-    borders.push(new Border(300,210,50,90,1,0,null,"black"))
-    borders.push(new Border(200,280,50,80,1,0,null,"black"))
-    borders.push(new Border(100,150,100,20,1,0,null,"black"))
+    borders.push(new Border(300,210,50,90,1,0,null,"#628dc4"))
+    borders.push(new Border(200,280,50,80,1,0,null,"#628dc4"))
+    borders.push(new Border(100,150,100,20,1,0,null,"#628dc4"))
 
     borders.push(new Border(300,210,50,90,1,1,null,"black"))
     borders.push(new Border(200,280,50,80,1,1,null,"black"))
     borders.push(new Border(100,150,100,20,1,1,null,"black"))
 
-    borders.push(new Border(0, 350, 1280, 10, 1, 0, null,"black"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null,"black"));
 
     borders.push(new Border(1150, 340, 1280, 10, 2, 0, null,"green"));
     borders.push(new Border(1150, 340, 1280, 10, 2, 1, null,"green"));
-
+    decorations.push(new Decoration("mountain",1,100,370))
+    decorations.push(new Decoration("mountain",1,700,360))
+     decorations.push(new Decoration("cloud",1,300,90))
+     decorations.push(new Decoration("cloud",1,800,140))
+    decorations.push(new Decoration("mountain",0,100,370))
+    decorations.push(new Decoration("mountain",0,700,360))
+     decorations.push(new Decoration("cloud",0,300,90))
+     decorations.push(new Decoration("cloud",0,800,140))
   }
 
   if(level==4){
-    borders.push(new Border(0, 350, 200, 10, 1, 0, null,"black"));
+    decorations.push(new Decoration("sun",0,1100,100))
+    decorations.push(new Decoration("moon",1,1100,100))
+    
+    borders.push(new Border(0, 350, 200, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(0, 350, 200, 10, 1, 1, null,"black"));
 
-    borders.push(new Border(350, 130, 100, 100, 1, 0, null,"black"));
-    borders.push(new Border(530, 100, 100, 100, 1, 0, null,"black"));
-    borders.push(new Border(750, 230, 100, 50, 1, 0, null,"black"));
+    borders.push(new Border(350, 130, 100, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(530, 100, 100, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(750, 230, 100, 50, 1, 0, null,"#628dc4"));
 
     borders.push(new Border(350, 130, 100, 100, 1, 1, null,"black"));
     borders.push(new Border(530, 100, 100, 100, 1, 1, null,"black"));
     borders.push(new Border(750, 230, 100, 50, 1, 1, null,"black"));
 
-    
-    
-
+    decorations.push(new Decoration("mountain",0,100,500));
+    decorations.push(new Decoration("mountain",0,200,400));
+    decorations.push(new Decoration("mountain",0,700,430));
+    decorations.push(new Decoration("cloud",0,120,100));
+    decorations.push(new Decoration("cloud",0,850,150));
+    decorations.push(new Decoration("mountain",1,100,500));
+    decorations.push(new Decoration("mountain",1,200,400));
+    decorations.push(new Decoration("mountain",1,700,430));
+    decorations.push(new Decoration("cloud",1,120,100));
+    decorations.push(new Decoration("cloud",1,850,150));
+   
     borders.push(new Border(1150, 340, 1280, 10, 2, 0, null,"green"));
     borders.push(new Border(1150, 340, 1280, 10, 2, 1, null,"green"));
   }
   if(level==5){
-
+    decorations.push(new Decoration("sun",0,1100,100))
+    decorations.push(new Decoration("moon",1,1100,100))
     
     interactives.push(new InteractiveObject(200, 130, 50, 50, 1,0));
     interactives.push(new InteractiveObject(1200, 125, 50, 25, 0,1));
@@ -340,18 +382,18 @@ function setupLvl(level) {
     borders.push(new Border(0, 350, 400, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(900, 350, 380, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(900, 150, 380, 10, 1, 0, null,"#628dc4"));
-    borders.push(new Border(900, 150, 10, 200, 1, 0, interactives[2],"#9ecfff"));
+    borders.push(new Border(900, 150, 10, 200, 3, 0, interactives[2],"#9ecfff"));
     borders.push(new Border(400, 250, 100, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(600, 300, 100, 10, 1, 0, null,"#628dc4"));
-    borders.push(new Border(200, 180, 100, 10, 1, 0, null,"bla#628dc4ck"));
+    borders.push(new Border(200, 180, 100, 10, 1, 0, null,"#628dc4ck"));
     borders.push(new Border(700, 180, 100, 10, 1, 0, null,"#628dc4"));
-    borders.push(new Border(900, 00, 10, 200, 1, 0, interactives[0],"#9ecfff"));
+    borders.push(new Border(900, 00, 10, 200, 3, 0, interactives[0],"#9ecfff"));
 
     borders.push(new Border(900, 150, 380, 10, 1, 1, null,"black"));
     borders.push(new Border(400, 250, 100, 10, 1, 1, null,"black"));
     borders.push(new Border(600, 300, 100, 10, 1, 1, null,"black"));
     borders.push(new Border(200, 180, 100, 10, 1, 1, null,"black"));
-    borders.push(new Border(900, 150, 10, 200, 1, 1, interactives[1],"#666f78"));
+    borders.push(new Border(900, 150, 10, 200, 3, 1, interactives[1],"black"));
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null,"black"));
     
     borders.push(new Border(1050, 340, 100, 10, 2, 0, null,"green"));
@@ -360,22 +402,18 @@ function setupLvl(level) {
    
     decorations.push(new Decoration("mountain",1,0,400));
     decorations.push(new Decoration("mountain",1,100,360));
-
     decorations.push(new Decoration("mountain",1,500,380));
     decorations.push(new Decoration("mountain",1,600,450));
-
-
-    decorations.push(new Decoration("mountain",0,0,420));
-    decorations.push(new Decoration("mountain",0,100,360));
-
-    decorations.push(new Decoration("mountain",0,700,380));
-    decorations.push(new Decoration("mountain",0,800,450));
-
-    decorations.push(new Decoration("cloud",0,100,100));
-    decorations.push(new Decoration("cloud",0,400,70));
-
     decorations.push(new Decoration("cloud",1,50,100));
     decorations.push(new Decoration("cloud",1,700,70));
+
+    decorations.push(new Decoration("mountain",0,0,400));
+    decorations.push(new Decoration("mountain",0,100,360));
+    decorations.push(new Decoration("mountain",0,500,380));
+    decorations.push(new Decoration("mountain",0,600,450));
+    decorations.push(new Decoration("cloud",0,50,100));
+    decorations.push(new Decoration("cloud",0,700,70));
+ 
   }
 }
 
@@ -392,7 +430,7 @@ function checkLvl() {
 function drawTips() {
 
   context.fillStyle = "black"
-  context2.fillStyle = "black"
+  context2.fillStyle = "white"
   context.font="15px Verdana"
   context2.font="15px Verdana"
   if (showTips) {

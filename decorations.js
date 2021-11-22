@@ -33,6 +33,16 @@ function Decoration(type,gameNmr,x,y){
                 context.fill();
                 break;
             }
+            case "sun":{
+              context.fillStyle="#edca6b";
+              context.beginPath();
+              context.arc(x,y,50,0,360)
+              context.closePath();
+              context.strokeStyle="#edca6b"
+              context.stroke()
+              context.fill()
+              break;
+            }
 
           }
         }
@@ -53,7 +63,7 @@ function Decoration(type,gameNmr,x,y){
               }
               case "mountain":{
                   context2.beginPath();
-                  context.moveTo(x,y);
+                  context2.moveTo(x,y);
                   context2.lineTo(x+200,y-300)
                   context2.lineTo(x+400,y)
                   context2.lineTo(x,y)
@@ -64,6 +74,17 @@ function Decoration(type,gameNmr,x,y){
                   context2.fill();
                   break;
               }
+              case "moon":{
+                context2.fillStyle="#b3b0a8";
+                context2.beginPath();
+                context2.arc(x,y,50,0,360)
+                context2.closePath();
+                context2.strokeStyle="#b3b0a8"
+                context2.stroke()
+                context2.fill()
+                break;
+              }
+              
               
             }
           }
