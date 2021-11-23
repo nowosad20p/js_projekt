@@ -32,7 +32,7 @@ this.cd=0;
     if (gameNmr == 0) {
 
 
-      if (this.y + this.height - (y_ + h) > 0 && this.y + this.height - (y_ + h) < interactiveRange && (this.x + this.width) - x_ > -interactiveRange && (this.x + this.width) - x_ < interactiveRange) {
+      if (this.y+1 + this.height - (y_ + h) > 0 && this.y+1 + this.height - (y_ + h) < interactiveRange*0.5 && (this.x + this.width) - x_ > -interactiveRange && (this.x + this.width) - x_ < interactiveRange) {
      
 
         if (interactionKey) {

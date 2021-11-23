@@ -24,13 +24,13 @@ let interactionKey2;
 
 //game settings
 let framerate = 45;
-let interactiveRange = 152;
+let interactiveRange = 120;
 
 //zmienne odpowiadające za sprawdzenie czy graczwe dotarli do mety
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 5;
+let curLevel = 6;
 let maxLevel = curLevel;
 
 function loadSettings() {
@@ -191,7 +191,7 @@ function setupInputs() {
     }
   });
 }
-
+//funkcja odpowiadająca za sprawdzenie czy obiekt jest w drugim
 function checkIntersection(r1, r2) {
   if (r1.gameNmr == r2.gameNmr) {
     if (r1.x > r2.x + r2.width) {
@@ -220,16 +220,23 @@ function checkIntersection(r1, r2) {
         return false;
       }
       if (r2.interactive != null) {
-        if (r2.interactive.active == true) {
+        if(r2.type==3){
+        if (r2.interactive.active) {
 
           return false;
         }
+      }else if(r2.type==4){
+        if (!r2.interactive.active) {
+
+          return false;
+        }
+      }
       }
       return true;
     }
   }
 }
-
+//funkcja odpowiadająca za sprawdzenie czy gracz dotarł do mety
 function objective(onOff, playerNmr) {
   if (onOff) {
     if (playerNmr == 0) {
@@ -246,7 +253,7 @@ function objective(onOff, playerNmr) {
     }
   }
 }
-
+//funkcja tworząca obiekty składające się na poziom
 function setupLvl(level) {
   context2.fillRect(0, 0, 1280, 360);
   context.fillRect(0, 0, 1280, 360);
@@ -256,9 +263,9 @@ function setupLvl(level) {
   interactives=[];
   decorations=[];
   player.x=0
-  player.y=0
+  player.y=300
   player2.x=0
-  player2.y=0
+  player2.y=300
   if (level == 1) {
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null, "black"));
     borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "gray"));
@@ -414,6 +421,53 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud",0,50,100));
     decorations.push(new Decoration("cloud",0,700,70));
  
+  }
+  if(level==6){
+    interactives.push(new InteractiveObject(1200, 200, 50, 50, 0,0));
+    interactives.push(new InteractiveObject(1200, 300, 50, 50, 1,0));
+    interactives.push(new InteractiveObject(1200, 300, 50, 50, 0,0));
+    interactives.push(new InteractiveObject(0, 200, 50, 50, 1,0));
+    interactives.push(new InteractiveObject(0, 100, 50, 50, 0,0));
+
+    borders.push(new Border(0, 350, 1280, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 1, null,"black"));
+    borders.push(new Border(0, 250, 900, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(0, 250, 300, 10, 1, 1, null,"black"));
+    borders.push(new Border(300, 250, 150, 10, 3, 1, interactives[0],"black"));
+    borders.push(new Border(450, 250, 600, 10, 3, 1, interactives[4],"black"));
+    borders.push(new Border(1050, 250, 230, 10, 1, 1, null,"black"));
+
+    borders.push(new Border(900, 250, 900, 10, 3, 0, interactives[2],"#628dc4"));
+    borders.push(new Border(1100, 250, 280, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1100, 250, 10, 100, 3, 0, interactives[1],"#628dc4"));
+
+    borders.push(new Border(400, 150, 10, 100, 3, 0, interactives[3],"#628dc4"));
+    borders.push(new Border(900, 250, 10, 100, 3, 0, interactives[1],"#628dc4"));
+    borders.push(new Border(900, 250, 10, 100, 4, 1, interactives[1],"black"));
+    borders.push(new Border(0, 150, 200, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(200, 150, 200, 10, 3, 0, interactives[1],"#628dc4"));
+    borders.push(new Border(400, 150, 880, 10, 1, 0, null,"#628dc4"));
+
+    borders.push(new Border(0, 150, 300, 10, 1, 1, null,"black"));
+    borders.push(new Border(300, 150, 150, 10, 3, 1, interactives[2],"black"));
+    borders.push(new Border(450, 150, 1280, 10, 1,1, null,"black"));
+    borders.push(new Border(0,150, 300, 10, 1, 1, null,"black"));
+    borders.push(new Border(300,150, 200, 10, 3, 1, interactives[2],"black"));
+    borders.push(new Border(1200,140,100,10,2,0,null,"green"))
+    borders.push(new Border(1200,140,100,10,2,1,null,"green"))
+    decorations.push(new Decoration("sun",0,1100,60))
+    decorations.push(new Decoration("moon",1,1100,60))
+    decorations.push(new Decoration("mountain",0,0,390))
+    decorations.push(new Decoration("mountain",0,100,360))
+    decorations.push(new Decoration("mountain",0,1100,360))
+    decorations.push(new Decoration("cloud",0,900,50))
+    decorations.push(new Decoration("cloud",0,400,45))
+
+    decorations.push(new Decoration("mountain",1,0,390))
+    decorations.push(new Decoration("mountain",1,100,360))
+    decorations.push(new Decoration("mountain",1,1100,360))
+    decorations.push(new Decoration("cloud",1,900,50))
+    decorations.push(new Decoration("cloud",1,400,45))
   }
 }
 
