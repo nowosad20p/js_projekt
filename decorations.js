@@ -1,9 +1,12 @@
 function Decoration(type,gameNmr,x,y){
+  //rodzaj dekoracji
     this.type=type;
+    //numer gry w którym dana dekoracja ma wystąpić
     this.gameNmr=gameNmr;
+    //współrzędme
     this.x=x;
     this.y=y;
-
+//funkcja rysująca dekoracje
     this.decorationDraw= function(){
         if(gameNmr==0){
           switch(type){

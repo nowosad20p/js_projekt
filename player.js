@@ -1,15 +1,22 @@
 function Player(x, y, type) {
+    //współrzędne gracza
     this.x = x;
     this.y = y;
+    //prędkości gracza
     this.xspeed = 0;
     this.yspeed = 0;
+    //tarcie
     this.friction = 0.6;
+    //typ gracza(numer gry)
     this.type = type;
+    //reszta właściwosci gracza
     this.maxSpeed = 10;
     this.width = 50;
     this.height = 50;
     this.active = true;
+    //boolean odpowiadający za sprawdzenie czy gracz dotarł na ziemie
     this.grounded = false;
+    //funkcja odpowiadająca za poruszenie graczem
     this.step = function () {
         if (this.active) {
             if (this.type == 0) {
@@ -71,11 +78,7 @@ function Player(x, y, type) {
             } else {
                 this.xspeed = Math.ceil(this.xspeed);
             }
-            //  if(this.yspeed>0){
-            //      this.yspeed=Math.ceil(this.yspeed);
-            //  }else{
-            //      this.yspeed=Math.ceil(this.yspeed);
-            //  }
+
 
             let horizontalRect = {
                 type: this.type,
@@ -187,6 +190,7 @@ function Player(x, y, type) {
         }
 
     }
+    //funkcja odpowiedzialna za narysowanie operacji wykonanych w funkcji step
     this.draw = function () {
         if (type == 0) {
             context.fillStyle = "#2c2e30";
@@ -199,9 +203,10 @@ function Player(x, y, type) {
         }
 
     }
-    this.teleport = function(x,y){
-        this.x=x;
-        this.y=y;
+    //funkcja używana przy ustawianiu gracza 
+    this.teleport = function (x, y) {
+        this.x = x;
+        this.y = y;
     }
 
 }
