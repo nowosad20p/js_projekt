@@ -37,7 +37,7 @@ let gameTimeHours=0;
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 8;
+let curLevel = 1;
 let maxLevel = curLevel;
 //wczytywanie ustawien
 function loadSettings() {
@@ -72,6 +72,7 @@ if(curLevel<maxLevel){
   setTimeout(clearErrorMsg,2000)
 }
 }
+//funkcja zliczająca czas
 function countTime(){
   gameTimeSeconds++;
   if(gameTimeSeconds>59){
@@ -83,6 +84,7 @@ function countTime(){
     }
   }
 }
+//wywoływanie wszystkiego przy włączeniu strony
 window.onload = function () {
 
   loadSettings()
@@ -110,7 +112,7 @@ window.onload = function () {
   setupInputs();
   setupLvl(curLevel);
 };
-
+//wywoływanie kroków
 function step() {
   player.step();
   player2.step();
@@ -125,7 +127,7 @@ function step() {
     
   }
 }
-
+//rysowanie efektów wywołanych kroków
 function draw() {
 
   context.fillStyle = "#d4e4fc";
@@ -135,7 +137,7 @@ function draw() {
   for (let i = 0; i < decorations.length; i++) {
     decorations[i].decorationDraw();
   }
-  drawTips();
+
   player.draw();
   player2.draw();
   
@@ -145,7 +147,7 @@ function draw() {
   for (let i = 0; i < borders.length; i++) {
     borders[i].draw();
   }
-  
+  drawTips();
 }
 //funkcja przygotowująca wszystkie pptrzebne dane wejściowe
 function setupInputs() {
@@ -289,7 +291,9 @@ function objective(onOff, playerNmr) {
   }
 }
 //funkcja tworząca obiekty składające się na poziom
+
 function setupLvl(level) {
+
   context2.fillRect(0, 0, 1280, 360);
   context.fillRect(0, 0, 1280, 360);
   playerOneFinished = false;
@@ -297,11 +301,10 @@ function setupLvl(level) {
   borders = [];
   interactives=[];
   decorations=[];
-  player.x=0
-  player.y=300
-  player2.x=0
-  player2.y=300
+  
   if (level == 1) {
+    player.teleport(0,50);
+    player2.teleport(0,50);
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null, "black"));
     borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "gray"));
     borders.push(new Border(100, 310, 100, 100, 1, 0, null, "gray"));
@@ -328,6 +331,8 @@ function setupLvl(level) {
 
   }
   if (level == 2) {
+    player.teleport(0,50);
+    player2.teleport(0,50);
     decorations.push(new Decoration("sun",0,1100,100))
     decorations.push(new Decoration("moon",1,1100,100))
     decorations.push(new Decoration("mountain",0,300,500));
@@ -352,6 +357,8 @@ function setupLvl(level) {
     borders.push(new Border(600, 340, 100, 10, 2, 0, null, "yellow"))
   }
   if (level == 3) {
+    player.teleport(0,250);
+    player2.teleport(0,250);
     decorations.push(new Decoration("sun",0,1100,100))
     decorations.push(new Decoration("moon",1,1100,100))
     
@@ -385,6 +392,8 @@ function setupLvl(level) {
   }
 
   if(level==4){
+    player.teleport(0,250);
+    player2.teleport(0,250);
     decorations.push(new Decoration("sun",0,1100,100))
     decorations.push(new Decoration("moon",1,1100,100))
     
@@ -414,6 +423,8 @@ function setupLvl(level) {
     borders.push(new Border(1150, 340, 1280, 10, 2, 1, null,"green"));
   }
   if(level==5){
+    player.teleport(0,250);
+    player2.teleport(0,250);
     decorations.push(new Decoration("sun",0,1100,100))
     decorations.push(new Decoration("moon",1,1100,100))
     
@@ -458,7 +469,8 @@ function setupLvl(level) {
  
   }
   if(level==6){
-    
+    player.teleport(0,300);
+    player2.teleport(0,300);
     interactives.push(new InteractiveObject(1200, 200, 50, 50, 0,0));
     interactives.push(new InteractiveObject(1200, 300, 50, 50, 1,0));
     interactives.push(new InteractiveObject(1200, 300, 50, 50, 0,0));
@@ -506,6 +518,8 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud",1,400,45))
   }
   if(level==7){
+    player.teleport(0,250);
+    player2.teleport(0,250);
     interactives.push(new InteractiveObject(1200, 50, 50, 50, 1,0));
     interactives.push(new InteractiveObject(1200, 50, 50, 50, 0,0));
     borders.push(new Border(0, 350, 100, 10, 1, 0, null,"#628dc4"));
@@ -555,6 +569,10 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud",0,0,80))
   }
   if(level==8){
+    player.x=0
+  player.y=300
+  player2.x=0
+  player2.y=300
     interactives.push(new InteractiveObject(0, 120, 50, 50, 1,0))
     interactives.push(new InteractiveObject(1000, 120, 50, 50, 0,0))
     
@@ -647,10 +665,8 @@ function setupLvl(level) {
     decorations.push(new Decoration("mountain",0,0,550))
     decorations.push(new Decoration("cloud",0,700,100))
     decorations.push(new Decoration("cloud",0,100,50))
-    player.x=0
-    player.y=50
-    player2.x=0 
-    player2.y=50
+    player.teleport(0,0);
+    player2.teleport(0,0);
   }
   if(level==10){
     interactives.push(new InteractiveObject(1000, 140, 50, 10,0,1))
@@ -702,8 +718,10 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud",0,800,50))
     decorations.push(new Decoration("cloud",0,0,80))
   }
+  
 }
 
+//sprawdza czy skończono poziom
 function checkLvl() {
   if (playerOneFinished && playerTwoFinished) {
     if(curLevel<10){
@@ -712,12 +730,13 @@ function checkLvl() {
       maxLevel=curLevel;
     }
     setupLvl(curLevel);
+    
    }else{
      EndGame();
    }
 }
 }
-
+//funkcja rysująca podpowiedzi na wczesnych poziomach
 function drawTips() {
 
   context.fillStyle = "black"
@@ -733,7 +752,7 @@ function drawTips() {
       }
       case 2: {
         context.fillText("Zręczność to nie wszystko. Mimo, że metę symbolizuje zawsze ten sam kolor znalezienie jej nie musi byc takie łatwe. Wskazówka: współpracujcie", 100, 30, 1280)
-        context2.fillText("Zręczność to nie wszystko. Mimo, że metę symbolizuje zawsze ten sam kolor znalezienie jej nie musi byc takie łatwe. Wskazówka: współpracujcie", 200, 30, 1280)
+        context2.fillText("Zręczność to nie wszystko. Mimo, że metę symbolizuje zawsze ten sam kolor znalezienie jej nie musi byc takie łatwe. Wskazówka: współpracujcie", 100, 30, 1280)
         break;
       }
       case 3: {
@@ -744,6 +763,16 @@ function drawTips() {
       case 4:{
         context.fillText("Gra ma jeszcze jedną dość ważną mechanikę. Spróbuj ją odkryć!", 400, 30, 1280)
         context2.fillText("Gra ma jeszcze jedną dość ważną mechanikę. Spróbuj ją odkryć!", 400, 30, 1280)
+        break;
+      }
+      case 5:{
+        context.fillText("Ostatnia rzecz. W grze występują obiekty interaktywne, które działają jedynie kiedy na nich się stanie. Poznasz je po tym, że są płaskie", 120, 30, 1280)
+        context2.fillText("Ostatnia rzecz. W grze występują obiekty interaktywne, które działają jedynie kiedy na nich się stanie. Poznasz je po tym, że są płaskie", 120, 30, 1280)
+        break;
+      }
+      case 6:{
+        context.fillText("Od tej pory gracie sami. Powodzenia!", 500, 30, 1280)
+        context2.fillText("Od tej pory gracie sami. Powodzenia!", 500, 30, 1280)
         break;
       }
 

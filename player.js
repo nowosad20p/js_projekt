@@ -78,6 +78,7 @@ function Player(x, y, type) {
             //  }
 
             let horizontalRect = {
+                type: this.type,
                 x: this.x + this.xspeed,
                 y: this.y,
                 width: this.width,
@@ -197,6 +198,10 @@ function Player(x, y, type) {
             context2.fillRect(this.x, this.y, this.width, this.height);
         }
 
+    }
+    this.teleport = function(x,y){
+        this.x=x;
+        this.y=y;
     }
 
 }
