@@ -37,7 +37,7 @@ let gameTimeHours=0;
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 8;
+let curLevel = 1;
 let maxLevel = curLevel;
 //wczytywanie ustawien
 function loadSettings() {
