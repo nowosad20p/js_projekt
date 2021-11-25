@@ -31,7 +31,7 @@ this.cd=0;
 
     if (gameNmr == 0) {
 
-
+      if(type==0){
       if (this.y+1 + this.height - (y_ + h) > 0 && this.y+1 + this.height - (y_ + h) < interactiveRange*0.5 && (this.x + this.width) - x_ > -interactiveRange && (this.x + this.width) - x_ < interactiveRange) {
      
 
@@ -51,12 +51,13 @@ this.cd=0;
         }
 
       } 
+    }
 
     } else if (gameNmr == 1) {
 
 
-
-      if (this.y + this.height - (y_ + h) > 0 && this.y + this.height - (y_ + h) < interactiveRange) {
+      if(type==0){
+      if (this.y + this.height - (y_ + h) > -1 && this.y + this.height - (y_ + h) < interactiveRange) {
         if ((this.x + this.width) - x_ > -interactiveRange && (this.x + this.width) - x_ < interactiveRange) {
 
           if (interactionKey2) {
@@ -73,6 +74,7 @@ this.cd=0;
         }
 
       }
+    }
 
     }
 

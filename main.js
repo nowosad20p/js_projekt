@@ -1,16 +1,20 @@
+//canvasy i contexty do wyświetlania gry
 let canvas;
 let context;
+let canvas2;
+let context2;
 
 let gameLoop;
-let player;
 
+let player;
+let player2;
 //tablice z elementami mapy
 let decorations=[];
 let borders = [];
 let interactives = [];
 
-let showTips = true
-//inputs
+
+//wejścia
 let upKey1;
 let rightKey1;
 let downKey1;
@@ -22,27 +26,30 @@ let leftKey2;
 let interactionKey;
 let interactionKey2;
 
-//game settings
+//ustawienia gry
 let framerate = 45;
 let interactiveRange = 120;
-
+let showTips = true
 //zmienne odpowiadające za sprawdzenie czy graczwe dotarli do mety
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 6;
+let curLevel = 10;
 let maxLevel = curLevel;
-
+//wczytywanie ustawien
 function loadSettings() {
-  console.log("dzialam" + showTips)
+ 
   showTips = document.querySelector("#showTips").checked
 }
+//funkcja do przycisku restartującego poziom
 function restartLevel(){
 setupLvl(curLevel)
 }
+//funkcja do wyczyszczenia okienka z błędem
 function clearErrorMsg(){
   errorMsg.innerHTML=""
 }
+//funkcja do cofnięcia poziomu
 function prevLevel(){
 if(curLevel-1>0){
   curLevel--;
@@ -52,6 +59,7 @@ if(curLevel-1>0){
   setTimeout(clearErrorMsg,2000)
 }
 }
+//funkcja do przejścia do kolejnego poziomu o ile jest odblokowany
 function nextLevel(){
 if(curLevel<maxLevel){
   curLevel++;
@@ -124,7 +132,7 @@ function draw() {
   }
   
 }
-
+//funkcja przygotowująca wszystkie pptrzebne dane wejściowe
 function setupInputs() {
   document.addEventListener("keydown", function (event) {
     if (event.key === "w") {
@@ -423,12 +431,14 @@ function setupLvl(level) {
  
   }
   if(level==6){
+    
     interactives.push(new InteractiveObject(1200, 200, 50, 50, 0,0));
     interactives.push(new InteractiveObject(1200, 300, 50, 50, 1,0));
     interactives.push(new InteractiveObject(1200, 300, 50, 50, 0,0));
     interactives.push(new InteractiveObject(0, 200, 50, 50, 1,0));
     interactives.push(new InteractiveObject(0, 100, 50, 50, 0,0));
-
+    borders.push(new Border(950, 140, 100, 10, 2, 0, null,"green"));
+    borders.push(new Border(950, 140, 100, 10, 2, 1, null,"green"));
     borders.push(new Border(0, 350, 1280, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null,"black"));
     borders.push(new Border(0, 250, 900, 10, 1, 0, null,"#628dc4"));
@@ -453,8 +463,7 @@ function setupLvl(level) {
     borders.push(new Border(450, 150, 1280, 10, 1,1, null,"black"));
     borders.push(new Border(0,150, 300, 10, 1, 1, null,"black"));
     borders.push(new Border(300,150, 200, 10, 3, 1, interactives[2],"black"));
-    borders.push(new Border(1200,140,100,10,2,0,null,"green"))
-    borders.push(new Border(1200,140,100,10,2,1,null,"green"))
+    
     decorations.push(new Decoration("sun",0,1100,60))
     decorations.push(new Decoration("moon",1,1100,60))
     decorations.push(new Decoration("mountain",0,0,390))
@@ -469,18 +478,217 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud",1,900,50))
     decorations.push(new Decoration("cloud",1,400,45))
   }
+  if(level==7){
+    interactives.push(new InteractiveObject(1200, 50, 50, 50, 1,0));
+    interactives.push(new InteractiveObject(1200, 50, 50, 50, 0,0));
+    borders.push(new Border(0, 350, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(0, 350, 100, 10, 1, 1, null,"black"));
+
+    borders.push(new Border(200, 300, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(100,170, 100, 30, 1, 1, null,"black"));
+    borders.push(new Border(200, 150, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(360, 100, 10, 260, 1, 1, null,"black"));
+    borders.push(new Border(440, 000, 10, 260, 1, 1, null,"black"));
+    borders.push(new Border(440, 330, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(1100, 100, 200, 10, 1, 1, null,"black"));
+    borders.push(new Border(900, 250, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(1100, 200, 100, 10, 1, 1, null,"black"));
+    borders.push(new Border(600, 350, 200, 10, 1, 1, null,"black"));
+    borders.push(new Border(600, 260, 10, 100, 1, 1, null,"black"));
+    borders.push(new Border(800, 260, 10, 100, 1, 1, null,"black"));
+    borders.push(new Border(600, 250, 210, 10, 3, 1, interactives[1],"black"));
+    borders.push(new Border(610, 340, 190, 10, 2, 1, null,"green"));
+
+    borders.push(new Border(200, 300, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(100,170, 100, 30, 1, 0, null,"#628dc4"));
+    borders.push(new Border(200, 150, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(360, 100, 10, 260, 1, 0, null,"#628dc4"));
+    borders.push(new Border(440, 000, 10, 260, 1, 0, null,"#628dc4"));
+    borders.push(new Border(440, 330, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1100, 100, 200, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(900, 250, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1100, 200, 100, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(600, 350, 200, 10, 1, 0, null,"#628dc4"));
+    borders.push(new Border(600, 260, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(800, 260, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(600, 250, 210, 10, 3, 0, interactives[0],"#628dc4"));
+    borders.push(new Border(610, 340, 190, 10, 2, 0, null,"green"));
+    decorations.push(new Decoration("mountain",1,800,410))
+    decorations.push(new Decoration("mountain",1,950,360))
+    decorations.push(new Decoration("mountain",1,0,440))
+    decorations.push(new Decoration("moon",1,870,50))
+    decorations.push(new Decoration("cloud",1,800,50))
+    decorations.push(new Decoration("cloud",1,0,80))
+
+    decorations.push(new Decoration("mountain",0,800,410))
+    decorations.push(new Decoration("mountain",0,950,360))
+    decorations.push(new Decoration("mountain",0,0,440))
+    decorations.push(new Decoration("sun",0,870,50))
+    decorations.push(new Decoration("cloud",0,800,50))
+    decorations.push(new Decoration("cloud",0,0,80))
+  }
+  if(level==8){
+    interactives.push(new InteractiveObject(0, 120, 50, 50, 1,0))
+    interactives.push(new InteractiveObject(1000, 120, 50, 50, 0,0))
+    
+    borders.push(new Border(0,170,50,10,1,1,null,"black"))
+    borders.push(new Border(0,350,300,10,1,1,null,"black"))
+    borders.push(new Border(0,350,300,10,1,0,null,"#628dc4"))
+    borders.push(new Border(350,230,100,10,1,1,null,"black"))
+    borders.push(new Border(850,230,100,10,1,1,null,"black"))
+    borders.push(new Border(550,170,100,10,4,1,interactives[1],"black"))
+    borders.push(new Border(200,150,100,10,1,1,null,"black"))
+    borders.push(new Border(0,100,100,10,1,1,null,"black"))
+
+   
+    borders.push(new Border(350,230,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(750,170,100,10,4,0,interactives[0],"#628dc4"))
+    borders.push(new Border(950,170,100,10,4,0,null,"#628dc4"))
+    borders.push(new Border(550,170,100,10,4,0,null,"#628dc4"))
+    borders.push(new Border(200,150,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(0,100,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(1060,330,120,10,1,0,null,"#628dc4"))
+    borders.push(new Border(1060,230,120,10,4,0,interactives[0],"#628dc4"))
+    borders.push(new Border(1060, 240, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1170, 240, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1070, 320, 100, 10, 2, 0, null,"green"));
+    borders.push(new Border(900, 220, 50, 10, 2, 1, null,"green"));
+    decorations.push(new Decoration("mountain",0,100,420))
+    decorations.push(new Decoration("mountain",0,700,360))
+    decorations.push(new Decoration("cloud",0,350,50))
+    decorations.push(new Decoration("cloud",0,800,150))
+    decorations.push(new Decoration("sun",0,1200,60))
+    decorations.push(new Decoration("mountain",1,100,420))
+    decorations.push(new Decoration("mountain",1,700,360))
+    decorations.push(new Decoration("cloud",1,350,50))
+    decorations.push(new Decoration("cloud",1,800,150))
+    decorations.push(new Decoration("moon",1,1200,60))
+  }
+  if(level==9){
+    player.x=0
+    player.y=50
+    player2.x=0 
+    player2.y=50
+    interactives.push(new InteractiveObject(0, 200, 50, 50,1,0))
+    interactives.push(new InteractiveObject(350, 50, 50, 50,1,0))
+    interactives.push(new InteractiveObject(0, 200, 50, 50,0,0))
+    interactives.push(new InteractiveObject(350, 50, 50, 50,0,0))
+    borders.push(new Border(0,100,100,10 ,1,1,null,"black"))
+    borders.push(new Border(0,250,100,10,1,1,null,"black"))
+    borders.push(new Border(250,0,10,360,3 ,1,interactives[2],"black"))
+    borders.push(new Border(260,240,90,10,1,1,null,"black"))
+    borders.push(new Border(350,100,90,50,1,1,null,"black"))
+    borders.push(new Border(490,100,90,10,1,1,null,"black"))
+    borders.push(new Border(490,300,90,10,1,1,null,"black"))
+
+    borders.push(new Border(650,180,100,10,1,1,null,"black"))
+    borders.push(new Border(820,150,100,10,1,1,null,"black"))
+    borders.push(new Border(990,120,100,10,1,1,null,"black"))
+    borders.push(new Border(1110,80,100,10,1,1,null,"black"))
+    borders.push(new Border(1110,0,10,80,1,1,null,"black"))
+    borders.push(new Border(1210,0,10,360,3,1,interactives[3],"black"))
+    borders.push(new Border(1120, 70, 90, 10, 2, 1, null,"green"));
+
+    
+    borders.push(new Border(0,100,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(0,250,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(250,0,10,360,3 ,0,interactives[0],"#628dc4"))
+    borders.push(new Border(260,240,90,10,1,0,null,"#628dc4"))
+    borders.push(new Border(350,100,90,50,1,0,null,"#628dc4"))
+    borders.push(new Border(490,100,90,10,1,0,null,"#628dc4"))
+    borders.push(new Border(490,300,90,10,1,0,null,"#628dc4"))
+
+    borders.push(new Border(650,180,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(820,150,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(990,120,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(1110,80,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(1110,0,10,80,1,0,null,"#628dc4"))
+    borders.push(new Border(1210,0,10,360,3,0,interactives[1],"#628dc4"))
+    borders.push(new Border(1120, 70, 90, 10, 2, 0, null,"green"));
+
+    decorations.push(new Decoration("moon",1,700,60))
+    decorations.push(new Decoration("mountain",1,500,460))
+    decorations.push(new Decoration("mountain",1,600,360))
+    decorations.push(new Decoration("mountain",1,0,550))
+    decorations.push(new Decoration("cloud",1,700,100))
+    decorations.push(new Decoration("cloud",1,100,50))
+
+    decorations.push(new Decoration("sun",0,700,60))
+    decorations.push(new Decoration("mountain",0,500,460))
+    decorations.push(new Decoration("mountain",0,600,360))
+    decorations.push(new Decoration("mountain",0,0,550))
+    decorations.push(new Decoration("cloud",0,700,100))
+    decorations.push(new Decoration("cloud",0,100,50))
+    
+  }
+  if(level==10){
+    interactives.push(new InteractiveObject(1000, 140, 50, 10,0,1))
+    interactives.push(new InteractiveObject(1100, 200, 50, 50,1,0))
+    interactives.push(new InteractiveObject(1100, 200, 50, 50,0,0))
+    player.x=0
+    player.y=50
+    player2.x=0 
+    player2.y=50
+    borders.push(new Border(1070, 340, 100, 10, 2, 1, null,"green"));
+    borders.push(new Border(1100, 140, 100, 10, 2, 0, null,"green"));
+
+    borders.push(new Border(0,150,100,10,1,1,null,"black"))
+    borders.push(new Border(100,150,100,10,3,1,interactives[0],"black"))
+    borders.push(new Border(200,150,1100 ,10,1,1,null,"black"))
+    borders.push(new Border(0,150,100,10,1,0,null,"black"))
+    borders.push(new Border(100,150,100,10,3,0,interactives[1],"black"))
+    borders.push(new Border(200,150,1100 ,10,1,0,null,"black"))
+    borders.push(new Border(900,150,10 ,100,4,0,interactives[1],"black"))
+
+    borders.push(new Border(0,250,1000,10,1,1,null,"black"))
+    borders.push(new Border(1000,250,100,10,3,1,interactives[2],"black"))
+ 
+    borders.push(new Border(1100,250,200,10,3,1,null,"black"))
+   
+    borders.push(new Border(0,250,100,10,1,0,null,"black"))
+    borders.push(new Border(100,250,100,10,1,0,null,"black"))
+    borders.push(new Border(200,250,1100 ,10,1,0,null,"black"))
+    
+
+    borders.push(new Border(0,350,100,10,1,1,null,"black"))
+    borders.push(new Border(100,350,100,10,3,1,null,"black"))
+    borders.push(new Border(200,350,1100 ,10,1,1,null,"black"))
+    borders.push(new Border(0,350,100,10,1,0,null,"black"))
+    borders.push(new Border(100,350,100,10,1,0,null,"black"))
+    borders.push(new Border(200,350,1100 ,10,1,0,null,"black"))
+
+    decorations.push(new Decoration("mountain",1,800,410))
+    decorations.push(new Decoration("mountain",1,950,360))
+    decorations.push(new Decoration("mountain",1,0,440))
+    decorations.push(new Decoration("moon",1,870,50))
+    decorations.push(new Decoration("cloud",1,800,50))
+    decorations.push(new Decoration("cloud",1,0,80))
+
+    decorations.push(new Decoration("mountain",0,800,410))
+    decorations.push(new Decoration("mountain",0,950,360))
+    decorations.push(new Decoration("mountain",0,0,440))
+    decorations.push(new Decoration("sun",0,870,50))
+    decorations.push(new Decoration("cloud",0,800,50))
+    decorations.push(new Decoration("cloud",0,0,80))
+  }
 }
 
 function checkLvl() {
   if (playerOneFinished && playerTwoFinished) {
+    //if(level<10){
     curLevel++;
     if(curLevel>maxLevel){
       maxLevel=curLevel;
     }
     setupLvl(curLevel);
-  }
+  // }else{
+  //   EndGame();
+  // }
 }
+}
+function EndGame(){
 
+}
 function drawTips() {
 
   context.fillStyle = "black"
