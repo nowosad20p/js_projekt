@@ -39,7 +39,7 @@ canvas{
 
 }
 #gameBody{
-
+   
     text-align: center;
 }
 #gameCnv{
@@ -76,4 +76,13 @@ display:none;
 #alert{
     display:block;
 }
+}
+#gameFinished{
+    height:300px;
+    width: 600px;
+    background-color: #fff;
+    font-style: bold;
+    margin-left:auto;
+    margin-right:auto;
+    display:none;
 }

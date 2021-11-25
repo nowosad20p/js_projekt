@@ -9,7 +9,7 @@ function Player(x, y, type) {
     this.width = 50;
     this.height = 50;
     this.active = true;
-    this.grounded=false;
+    this.grounded = false;
     this.step = function () {
         if (this.active) {
             if (this.type == 0) {
@@ -24,9 +24,9 @@ function Player(x, y, type) {
                 }
 
                 if (upKey1) {
-                    if (this.grounded&&!(this.yspeed>0)) {
+                    if (this.grounded && !(this.yspeed > 0)) {
                         this.yspeed = -50;
-                        this.grounded=false
+                        this.grounded = false
                     }
 
 
@@ -44,9 +44,9 @@ function Player(x, y, type) {
                 }
 
                 if (upKey2) {
-                    if (this.grounded&&!(this.yspeed>0)) {
+                    if (this.grounded && !(this.yspeed > 0)) {
                         this.yspeed = -50;
-                        this.grounded=false
+                        this.grounded = false
                     }
 
 
@@ -66,19 +66,19 @@ function Player(x, y, type) {
                 this.yspeed = -this.maxSpeed;
             }
 
-            if(this.xspeed>0){
-                     this.xspeed=Math.floor(this.xspeed);
-                 }else{
-                     this.xspeed=Math.ceil(this.xspeed);
-                 }
-                //  if(this.yspeed>0){
-                //      this.yspeed=Math.ceil(this.yspeed);
-                //  }else{
-                //      this.yspeed=Math.ceil(this.yspeed);
-                //  }
-           
+            if (this.xspeed > 0) {
+                this.xspeed = Math.floor(this.xspeed);
+            } else {
+                this.xspeed = Math.ceil(this.xspeed);
+            }
+            //  if(this.yspeed>0){
+            //      this.yspeed=Math.ceil(this.yspeed);
+            //  }else{
+            //      this.yspeed=Math.ceil(this.yspeed);
+            //  }
+
             let horizontalRect = {
-                x: this.x +this.xspeed,
+                x: this.x + this.xspeed,
                 y: this.y,
                 width: this.width,
                 height: this.height,
@@ -88,7 +88,7 @@ function Player(x, y, type) {
             let verticalRect = {
                 type: this.type,
                 x: this.x,
-                y: this.y+this.yspeed,
+                y: this.y + this.yspeed,
                 width: this.width,
                 height: this.height,
                 gameNmr: this.type
@@ -106,24 +106,25 @@ function Player(x, y, type) {
                     active: borders[i].active,
                 }
                 if (checkIntersection(horizontalRect, borderRect)) {
-                    while(checkIntersection(horizontalRect, borderRect)){
-                        horizontalRect.x-=Math.sign(this.xspeed);
-                       
-                    }this.x=horizontalRect.x;
+                    while (checkIntersection(horizontalRect, borderRect)) {
+                        horizontalRect.x -= Math.sign(this.xspeed);
+
+                    }
+                    this.x = horizontalRect.x;
                     this.xspeed = 0;
                 }
                 if (checkIntersection(verticalRect, borderRect)) {
-                    this.grounded=true;
-                    a=borderRect.type;
-                    if(borderRect.type==2){
-                        borderRect.type=1;
+                    this.grounded = true;
+                    a = borderRect.type;
+                    if (borderRect.type == 2) {
+                        borderRect.type = 1;
                     }
-                    while(checkIntersection(verticalRect, borderRect)){
-                        verticalRect.y-=0.25*Math.sign(this.yspeed);
-                        
+                    while (checkIntersection(verticalRect, borderRect)) {
+                        verticalRect.y -= 0.15 * Math.sign(this.yspeed);
+
                     }
-                    this.y=verticalRect.y;
-                    borderRect.type=a;
+                    this.y = verticalRect.y;
+                    borderRect.type = a;
                     this.yspeed = 0;
 
                 }
@@ -140,21 +141,21 @@ function Player(x, y, type) {
                 }
 
                 if (checkIntersection(horizontalRect, interactiveRect)) {
-                    while(checkIntersection(horizontalRect, interactiveRect)){
-                        horizontalRect.x-=Math.sign(this.xspeed);
-                       
+                    while (checkIntersection(horizontalRect, interactiveRect)) {
+                        horizontalRect.x -= Math.sign(this.xspeed);
+
                     }
-                    this.x=horizontalRect.x;
+                    this.x = horizontalRect.x;
                     this.xspeed = 0;
                 }
 
                 if (checkIntersection(verticalRect, interactiveRect)) {
-                    while(checkIntersection(verticalRect, interactiveRect)){
-                        verticalRect.y-=0.25*Math.sign(this.yspeed);
-                        
+                    while (checkIntersection(verticalRect, interactiveRect)) {
+                        verticalRect.y -= 0.25 * Math.sign(this.yspeed);
+
                     }
-                    this.grounded=true;
-                    this.y=verticalRect.y;
+                    this.grounded = true;
+                    this.y = verticalRect.y;
                     this.yspeed = 0;
 
                     if (interactives[i].type == 1) {
@@ -179,7 +180,7 @@ function Player(x, y, type) {
             }
 
             this.y += this.yspeed;
-             
+
             this.x += this.xspeed;
 
         }

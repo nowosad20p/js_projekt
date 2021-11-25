@@ -30,11 +30,14 @@ let interactionKey2;
 let framerate = 45;
 let interactiveRange = 120;
 let showTips = true
+let gameTimeSeconds=0;
+let gameTimeMinutes=0;
+let gameTimeHours=0;
 //zmienne odpowiadające za sprawdzenie czy graczwe dotarli do mety
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 10;
+let curLevel = 8;
 let maxLevel = curLevel;
 //wczytywanie ustawien
 function loadSettings() {
@@ -69,13 +72,25 @@ if(curLevel<maxLevel){
   setTimeout(clearErrorMsg,2000)
 }
 }
+function countTime(){
+  gameTimeSeconds++;
+  if(gameTimeSeconds>59){
+    gameTimeSeconds=0
+    gameTimeMinutes++;
+    if(gameTimeMinutes>59){
+      gameTimeSeconds=0
+      gameTimeHours++
+    }
+  }
+}
 window.onload = function () {
+
   loadSettings()
   document.querySelector("#showTips").addEventListener("click", loadSettings)
   document.querySelector("#resetGame").addEventListener("click", restartLevel)
   document.querySelector("#prevLevel").addEventListener("click", prevLevel)
   document.querySelector("#nextLevel").addEventListener("click", nextLevel)
-
+  document.querySelector("#gameFinished>button").addEventListener("click",()=>window.location.reload(true))
   errorMsg=document.querySelector("#errorMessage")
   canvas = document.getElementById("gameCnv");
   context = canvas.getContext("2d");
@@ -87,7 +102,7 @@ window.onload = function () {
   player2 = new Player(30, 40, 1);
 
   gameLoop = setInterval(step, 1000 / framerate);
-
+  countTimee=setInterval(countTime,1000)
   context.fillStyle = "lightGray";
   context.fillRect(0, 0, 1280, 360);
   context2.fillStyle = "darkGray";
@@ -200,7 +215,7 @@ function setupInputs() {
   });
 }
 //funkcja odpowiadająca za sprawdzenie czy obiekt jest w drugim
-function checkIntersection(r1, r2) {
+function checkIntersection(r1, r2,xy) {
   if (r1.gameNmr == r2.gameNmr) {
     if (r1.x > r2.x + r2.width) {
       if (r2.type == 2)
@@ -243,6 +258,18 @@ function checkIntersection(r1, r2) {
       return true;
     }
   }
+}
+//funkcja odpowiadająca za skończenie gry
+function EndGame(){
+  canvas.style.display="none";
+  canvas2.style.display="none";
+  let a=document.querySelector("#gameFinished")
+  a.style.display="block";
+  a.getElementsByTagName("p")[0].innerHTML="Gratuluję, ukończyliście grę!<br>Wasz czas to: "+gameTimeHours+":"+gameTimeMinutes+":"+gameTimeSeconds;
+  clearTimeout(countTimee)
+ 
+  
+
 }
 //funkcja odpowiadająca za sprawdzenie czy gracz dotarł do mety
 function objective(onOff, playerNmr) {
@@ -364,12 +391,12 @@ function setupLvl(level) {
     borders.push(new Border(0, 350, 200, 10, 1, 0, null,"#628dc4"));
     borders.push(new Border(0, 350, 200, 10, 1, 1, null,"black"));
 
-    borders.push(new Border(350, 130, 100, 100, 1, 0, null,"#628dc4"));
-    borders.push(new Border(530, 100, 100, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(320, 130, 100, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(500, 100, 100, 100, 1, 0, null,"#628dc4"));
     borders.push(new Border(750, 230, 100, 50, 1, 0, null,"#628dc4"));
 
-    borders.push(new Border(350, 130, 100, 100, 1, 1, null,"black"));
-    borders.push(new Border(530, 100, 100, 100, 1, 1, null,"black"));
+    borders.push(new Border(320, 130, 100, 100, 1, 1, null,"black"));
+    borders.push(new Border(500, 100, 100, 100, 1, 1, null,"black"));
     borders.push(new Border(750, 230, 100, 50, 1, 1, null,"black"));
 
     decorations.push(new Decoration("mountain",0,100,500));
@@ -537,7 +564,7 @@ function setupLvl(level) {
     borders.push(new Border(350,230,100,10,1,1,null,"black"))
     borders.push(new Border(850,230,100,10,1,1,null,"black"))
     borders.push(new Border(550,170,100,10,4,1,interactives[1],"black"))
-    borders.push(new Border(200,150,100,10,1,1,null,"black"))
+    borders.push(new Border(200,150,150,10,1,1,null,"black"))
     borders.push(new Border(0,100,100,10,1,1,null,"black"))
 
    
@@ -545,14 +572,18 @@ function setupLvl(level) {
     borders.push(new Border(750,170,100,10,4,0,interactives[0],"#628dc4"))
     borders.push(new Border(950,170,100,10,4,0,null,"#628dc4"))
     borders.push(new Border(550,170,100,10,4,0,null,"#628dc4"))
-    borders.push(new Border(200,150,100,10,1,0,null,"#628dc4"))
+    borders.push(new Border(200,150,150,10,1,0,null,"#628dc4"))
     borders.push(new Border(0,100,100,10,1,0,null,"#628dc4"))
-    borders.push(new Border(1060,330,120,10,1,0,null,"#628dc4"))
-    borders.push(new Border(1060,230,120,10,4,0,interactives[0],"#628dc4"))
-    borders.push(new Border(1060, 240, 10, 100, 1, 0, null,"#628dc4"));
-    borders.push(new Border(1170, 240, 10, 100, 1, 0, null,"#628dc4"));
-    borders.push(new Border(1070, 320, 100, 10, 2, 0, null,"green"));
-    borders.push(new Border(900, 220, 50, 10, 2, 1, null,"green"));
+    borders.push(new Border(1050,330,120,10,1,0,null,"#628dc4"))
+    borders.push(new Border(1050,230,120,10,4,0,interactives[0],"#628dc4"))
+    borders.push(new Border(1050, 240, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1160, 240, 10, 100, 1, 0, null,"#628dc4"));
+    borders.push(new Border(1060, 321, 100, 10, 2, 0, null,"green"));
+    borders.push(new Border(1060, 321, 100, 10, 2, 1, null,"green"));
+    borders.push(new Border(1050,330,120,10,1,1,null,"black"))
+    borders.push(new Border(1050, 240, 10, 100, 1, 1, null,"black"));
+    borders.push(new Border(1160, 240, 10, 100, 1, 1, null,"black"));
+    
     decorations.push(new Decoration("mountain",0,100,420))
     decorations.push(new Decoration("mountain",0,700,360))
     decorations.push(new Decoration("cloud",0,350,50))
@@ -565,10 +596,7 @@ function setupLvl(level) {
     decorations.push(new Decoration("moon",1,1200,60))
   }
   if(level==9){
-    player.x=0
-    player.y=50
-    player2.x=0 
-    player2.y=50
+   
     interactives.push(new InteractiveObject(0, 200, 50, 50,1,0))
     interactives.push(new InteractiveObject(350, 50, 50, 50,1,0))
     interactives.push(new InteractiveObject(0, 200, 50, 50,0,0))
@@ -619,7 +647,10 @@ function setupLvl(level) {
     decorations.push(new Decoration("mountain",0,0,550))
     decorations.push(new Decoration("cloud",0,700,100))
     decorations.push(new Decoration("cloud",0,100,50))
-    
+    player.x=0
+    player.y=50
+    player2.x=0 
+    player2.y=50
   }
   if(level==10){
     interactives.push(new InteractiveObject(1000, 140, 50, 10,0,1))
@@ -675,20 +706,18 @@ function setupLvl(level) {
 
 function checkLvl() {
   if (playerOneFinished && playerTwoFinished) {
-    //if(level<10){
-    curLevel++;
+    if(curLevel<10){
+    curLevel+=1;
     if(curLevel>maxLevel){
       maxLevel=curLevel;
     }
     setupLvl(curLevel);
-  // }else{
-  //   EndGame();
-  // }
+   }else{
+     EndGame();
+   }
 }
 }
-function EndGame(){
 
-}
 function drawTips() {
 
   context.fillStyle = "black"
