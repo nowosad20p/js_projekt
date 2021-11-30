@@ -37,7 +37,7 @@ let gameTimeHours = 0;
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 1;
+let curLevel = 2;
 let maxLevel = curLevel;
 //wczytywanie ustawien
 function loadSettings() {
@@ -219,7 +219,7 @@ function setupInputs() {
 //funkcja odpowiadająca za sprawdzenie czy obiekt jest w drugim
 function checkIntersection(r1, r2, xy) {
   if (r1.gameNmr == r2.gameNmr) {
-    if (r1.x > r2.x + r2.width) {
+    if (r1.x >= r2.x + r2.width) {
       if (r2.type == 2)
         objective(false, r1.type);
       return false;

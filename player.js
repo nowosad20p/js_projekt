@@ -113,6 +113,9 @@ function Player(x, y, type) {
                     while (checkIntersection(horizontalRect, borderRect)) {
                         horizontalRect.x -= Math.sign(this.xspeed);
 
+                        
+
+
                     }
                     this.x = horizontalRect.x;
                     this.xspeed = 0;
@@ -124,14 +127,17 @@ function Player(x, y, type) {
                         borderRect.type = 1;
                     }
                     while (checkIntersection(verticalRect, borderRect)) {
-                        verticalRect.y -= 0.15 * Math.sign(this.yspeed);
+                      
+                        verticalRect.y -=  0.25*Math.sign(this.yspeed);
 
                     }
                     this.y = verticalRect.y;
                     borderRect.type = a;
                     this.yspeed = 0;
+                    console.log("ustawiam 0")
 
                 }
+                
             }
             for (let i = 0; i < interactives.length; i++) {
                 let interactiveRect = {
