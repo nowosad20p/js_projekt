@@ -129,12 +129,16 @@ function Player(x, y, type) {
                     while (checkIntersection(verticalRect, borderRect)) {
                       
                         verticalRect.y -=  0.25*Math.sign(this.yspeed);
+                        if(this.yspeed==0){
+                          
+                            break;
+                        }
 
                     }
                     this.y = verticalRect.y;
                     borderRect.type = a;
                     this.yspeed = 0;
-                    console.log("ustawiam 0")
+                    
 
                 }
                 
@@ -162,7 +166,10 @@ function Player(x, y, type) {
                 if (checkIntersection(verticalRect, interactiveRect)) {
                     while (checkIntersection(verticalRect, interactiveRect)) {
                         verticalRect.y -= 0.25 * Math.sign(this.yspeed);
-
+                        if(this.yspeed==0){
+                          
+                            break;
+                        }
                     }
                     this.grounded = true;
                     this.y = verticalRect.y;

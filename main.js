@@ -37,7 +37,7 @@ let gameTimeHours = 0;
 let playerOneFinished;
 let playerTwoFinished;
 //zmienne odpowiadające za ładowanie się poziomów
-let curLevel = 2;
+let curLevel = 1;
 let maxLevel = curLevel;
 //wczytywanie ustawien
 function loadSettings() {
@@ -306,12 +306,12 @@ function setupLvl(level) {
     player.teleport(0, 50);
     player2.teleport(0, 50);
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null, "black"));
-    borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "gray"));
-    borders.push(new Border(100, 310, 100, 100, 1, 0, null, "gray"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "#628dc4"));
+    borders.push(new Border(100, 310, 100, 100, 1, 0, null, "#628dc4"));
     borders.push(new Border(100, 310, 100, 100, 1, 1, null, "black"));
-    borders.push(new Border(310, 260, 100, 50, 1, 0, null, "gray"));
+    borders.push(new Border(310, 260, 100, 50, 1, 0, null, "#628dc4"));
     borders.push(new Border(310, 260, 100, 50, 1, 1, null, "black"));
-    borders.push(new Border(610, 190, 100, 50, 1, 0, null, "gray"));
+    borders.push(new Border(610, 190, 100, 50, 1, 0, null, "#628dc4"));
     borders.push(new Border(610, 190, 100, 50, 1, 1, null, "black"));
     borders.push(new Border(810, 190, 100, 50, 2, 0, null, "green"));
     borders.push(new Border(810, 190, 100, 50, 2, 1, null, "green"));
@@ -342,7 +342,7 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud", 1, 500, 100));
     decorations.push(new Decoration("cloud", 0, 500, 100));
     borders.push(new Border(0, 350, 1280, 10, 1, 1, null, "black"));
-    borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "gray"));
+    borders.push(new Border(0, 350, 1280, 10, 1, 0, null, "#628dc4"));
     borders.push(new Border(200, 340, 100, 10, 1, 0, null, "red"))
     borders.push(new Border(400, 340, 100, 10, 1, 0, null, "yellow"))
 
