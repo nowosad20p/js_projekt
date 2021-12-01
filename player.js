@@ -112,7 +112,10 @@ function Player(x, y, type) {
                 if (checkIntersection(horizontalRect, borderRect)) {
                     while (checkIntersection(horizontalRect, borderRect)) {
                         horizontalRect.x -= Math.sign(this.xspeed);
-
+                        if(this.xspeed==0){
+                          
+                            break;
+                        }
                         
 
 
@@ -157,6 +160,10 @@ function Player(x, y, type) {
                 if (checkIntersection(horizontalRect, interactiveRect)) {
                     while (checkIntersection(horizontalRect, interactiveRect)) {
                         horizontalRect.x -= Math.sign(this.xspeed);
+                        if(this.xspeed==0){
+                          
+                            break;
+                        }
 
                     }
                     this.x = horizontalRect.x;
@@ -218,6 +225,8 @@ function Player(x, y, type) {
     }
     //funkcja używana przy ustawianiu gracza 
     this.teleport = function (x, y) {
+        this.xspeed=0;
+        this.yspeed=0;
         this.x = x;
         this.y = y;
     }

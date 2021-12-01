@@ -52,6 +52,12 @@ function restartLevel() {
 function clearErrorMsg() {
   errorMsg.innerHTML = ""
 }
+//zablokowanie poruszania strony strzałkami 
+window.addEventListener("keydown", function(e) {
+  if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+      e.preventDefault();
+  }
+}, false);
 //funkcja do cofnięcia poziomu
 function prevLevel() {
   if (curLevel - 1 > 0) {
@@ -569,10 +575,8 @@ function setupLvl(level) {
     decorations.push(new Decoration("cloud", 0, 0, 80))
   }
   if (level == 8) {
-    player.x = 0
-    player.y = 300
-    player2.x = 0
-    player2.y = 300
+    player.teleport(0, 300);
+    player2.teleport(0, 300);
     interactives.push(new InteractiveObject(0, 120, 50, 50, 1, 0))
     interactives.push(new InteractiveObject(1000, 120, 50, 50, 0, 0))
 
@@ -672,10 +676,8 @@ function setupLvl(level) {
     interactives.push(new InteractiveObject(1000, 140, 50, 10, 0, 1))
     interactives.push(new InteractiveObject(1100, 200, 50, 50, 1, 0))
     interactives.push(new InteractiveObject(1100, 200, 50, 50, 0, 0))
-    player.x = 0
-    player.y = 50
-    player2.x = 0
-    player2.y = 50
+    player.teleport(0, 50);
+    player2.teleport(0, 50);
     borders.push(new Border(1070, 340, 100, 10, 2, 1, null, "green"));
     borders.push(new Border(1100, 140, 100, 10, 2, 0, null, "green"));
 
